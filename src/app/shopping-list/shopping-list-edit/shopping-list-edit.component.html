@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            ngModel
+            name="name"
+            #name="ngModel"
+            required
+            class="form-control"
+          />
+          <span
+            class="help-block validation-message"
+            *ngIf="!name.valid && name.touched"
+            >Ingredient name is required</span
+          >
+        </div>
+        <div class="col-sm-4 form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="number"
+            ngModel
+            name="amount"
+            #amount="ngModel"
+            required
+            id="amount"
+            class="form-control"
+            [pattern]="'^[1-9]+[0-9]*$'"
+          />
+          <span
+            class="help-block validation-message"
+            *ngIf="!amount.valid && amount.touched"
+            >Amount must be a positive number</span
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            class="btn btn-success"
+            [disabled]="!form.valid"
+            type="submit"
+          >
+            {{ editMode ? "Update" : "Add" }}
+          </button>
+          <button class="btn btn-danger" type="button" (click)="onDelete()">
+            Delete
+          </button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">
+            Clear
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
